@@ -97,7 +97,8 @@ fun CurrenciesSection() {
         mutableStateOf(Icons.Rounded.KeyboardArrowUp)
     }
 
-    Box(modifier = Modifier
+    Box(
+        modifier = Modifier
         .fillMaxSize()
         .padding(top = 32.dp),
         contentAlignment = Alignment.BottomCenter
@@ -149,10 +150,13 @@ fun CurrenciesSection() {
             Spacer(modifier = Modifier
                 .height(1.dp)
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.onSecondary)
+                .background(MaterialTheme.colorScheme.secondaryContainer)
             )
 
             if (isVisible) {
+                
+                Spacer(modifier = Modifier.height(10.dp))
+                
                 BoxWithConstraints(
                     modifier = Modifier
                         .fillMaxSize()
@@ -167,7 +171,7 @@ fun CurrenciesSection() {
                     Column (
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp)
+                            .padding(horizontal = 16.dp)
                     ){
 
                         Spacer(modifier = Modifier.height(16.dp))
@@ -176,7 +180,7 @@ fun CurrenciesSection() {
                             modifier = Modifier.fillMaxWidth()
                         ){
                             Text(
-                                text = "Currencies",
+                                text = "Currency",
                                 modifier = Modifier.width(width),
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold,
@@ -233,18 +237,55 @@ fun CurrencyItem(index: Int, width: Dp) {
             .padding(bottom = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ){
-        Box(
-            modifier = Modifier
-                .clip(RoundedCornerShape(8.dp))
-                .background(GreenStart)
-                .padding(4.dp)
+        Row (
+            modifier = Modifier.width(width),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                modifier = Modifier.size(18.dp),
-                imageVector = currency.icon,
-                contentDescription = currency.name,
-                tint = Color.White
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(GreenStart)
+                    .padding(4.dp)
+            ) {
+                Icon(
+                    modifier = Modifier.size(18.dp),
+                    imageVector = currency.icon,
+                    contentDescription = currency.name,
+                    tint = Color.White
+                )
+            }
+
+            Text(
+                text = currency.name,
+                modifier = Modifier
+                    .padding(start = 10.dp),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onBackground,
             )
         }
+
+        Text(
+            text = "$ ${currency.buy}",
+            modifier = Modifier
+                    .width(width)
+                    .padding(start = 10.dp),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.End
+        )
+
+        Text(
+            text = "$ ${currency.sell}",
+            modifier = Modifier
+                    .width(width)
+                    .padding(start = 10.dp),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.End
+        )
+
     }
 }
